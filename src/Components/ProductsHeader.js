@@ -7,9 +7,9 @@ import { cartCount, userDetail } from '../App';
 export const orderValue = React.createContext();
 export default function ProductsHeader() {
     const { count} = useContext(cartCount)
-    const { userName} = useContext(userDetail);
+    const { username,onChangeUser} = useContext(userDetail);
     const [order, setOrder] = useState(0);
-    console.log(userName)
+    console.log(username)
 
     const onValueChange = (value) => {
         setOrder(value);
@@ -45,7 +45,7 @@ export default function ProductsHeader() {
                     </div>
                 </nav>
                 <div className='container'>
-                    <h1>Hi! {userName}</h1>
+                    <h1>Hi! {username}</h1>
                 </div>
                 <Outlet />
             </orderValue.Provider>
