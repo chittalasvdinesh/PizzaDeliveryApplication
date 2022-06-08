@@ -10,6 +10,7 @@ import ProductsHeader from './Components/ProductsHeader';
 import Signup from './Components/Signup';
 import Success from './Components/Success';
 import {createContext, useEffect, useState} from'react';
+import Notfound from './Components/Notfound';
 
 export const cartCount=createContext()
 export const userDetail=createContext()
@@ -48,10 +49,8 @@ function App() {
             <Route path='logout' element={<Logout/>}/>
             <Route path='order' element={<Order/>}/>
             <Route path='success' element={<Success/>}/>
-  
-           
           </Route>
-        
+          <Route path='*' element={<Notfound/>}/>
         </Routes>
       </section>
     </Router>

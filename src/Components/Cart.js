@@ -1,25 +1,35 @@
-import React, { useEffect, useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import { cartCount } from '../App';
-
+import { orderValue } from './ProductsHeader';
+import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
-    const { AddItem } = useContext(cartCount)
-    const [cartItem, setCartItem] = useState([])
-    
+    const navigate = useNavigate();
+    const { count, AddItem } = useContext(cartCount);
+    const { order, onValueChange } = useContext(orderValue);
+    const items = JSON.parse(localStorage.getItem('mycart'));
+    const [data, setData] = useState([]);
+    let [cprice,setcprice] = useState(0);
 
-    const navigate = useNavigate()
-
-    
     useEffect(() => {
-        if (localStorage.getItem('cartDetails') !== undefined) {
+        if (localStorage.getItem('cartDetails') != undefined) {
             let dataItems = JSON.parse(localStorage.getItem('cartDetails'));
-            setCartItem(dataItems);
+            setData(dataItems);
         }
     }, [])
 
-
-    let total = 0
+    useEffect(()=>{
+        if(localStorage.getItem('cartDetails') != undefined){
+            let dataItems = JSON.parse(localStorage.getItem('cartDetails'));
+        let x = 0; 
+            dataItems.forEach(element => {
+                x = x+parseFloat(element.price)
+            });
+            setcprice(x);
+        onValueChange(x);
+        }
+        
+    })
 
     const delProduct = (id) => {
         let array = JSON.parse(localStorage.getItem('cartDetails'))
@@ -35,75 +45,80 @@ export default function Cart() {
                 i = i + 1;
             });
             let localArray = JSON.parse(localStorage.getItem("cartDetails"));
-            localArray.splice(num, 1);
+            let newArr = localArray.splice(num, 1);
             let strarr = JSON.stringify(localArray);
             localStorage.setItem("cartDetails", strarr);
 
-
+           
 
             let localArray1 = JSON.parse(localStorage.getItem("mycart"));
-            localArray1.splice(num, 1);
+            let newArr1 = localArray1.splice(num,1);
             let strarr1 = JSON.stringify(localArray1);
-            localStorage.setItem("mycart", strarr1);
+            localStorage.setItem("mycart",strarr1);
             AddItem(localArray1);
 
             let dataItems = JSON.parse(localStorage.getItem('cartDetails'));
-            setCartItem(dataItems);
+            setData(dataItems);
         }
     }
 
-    const checkout = () => {
-        if (total === 0) {
-            alert('please add items to checkout')
+    const checkout = ()=> {
+        if(cprice === 0){
+            alert("please add items to cart");
+        }else{
+            navigate("/login/home/order")
         }
-        else {
-            navigate('/login/home/order')
-
-        }
-
+        
     }
-
-
-
-    //  console.log(itemArray)
 
     return (
-        <div className='container'>
-            <h2>Shopping cart</h2>
-            <table className='table'>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Pizza</th>
-                        <th>price</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cartItem.map((item, index) =>
-                        <tr key={index}>
-                            <td><img src={item.url} alt={item.name} width={50} /></td>
-                            <td>{item.name}</td>
-                            <td>${item.price}</td>
-                            <td>1</td>
+        <>
+            <div className='container'>
+                <p>
+                    Total Items in cart: {count.length}
+                </p>
+                <table className='table table-striped'>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Pizza</th>
+                            
+                            <th>price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((e, i) =>
+                            <tr key={i}>
+                                <td>
+                                <img src={e.url} alt={e.name} width="50"/>
+                                </td>
+                                <td>{e.name}
+                                
+                                </td>
+                                
+                                <td>{e.price}</td>
+                                <td>
+                                    <button className='btn btn-danger' onClick={() => delProduct(e.id)}>Remove</button>
+                                </td>
+                            </tr>
+                        )}
+                        <tr>
+                            <td >
+                            Total Amount: 
+                            </td>
+                            <td rowSpan="3">
+                            
+                            </td>
                             <td>
-                                <button className='btn btn-dark' onClick={() => delProduct(item.id)}>Delete</button>
+                            {cprice.toFixed(2)}
+                            </td>
+                            <td>
+                                <button className='btn btn-secondary' onClick={checkout}>Check out </button>
                             </td>
                         </tr>
-                    )}
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>{cartItem.forEach(item => {
-                            total += parseFloat(item.price)
-                        })} ${total.toFixed(2)}</td>
-                        <td>
-                            <button className='btn btn-secondary' onClick={checkout}>Check out </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-        </div>
+                    </tbody>
+                </table>
+            </div>
+        </>
     )
 }
