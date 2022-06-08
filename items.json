@@ -1,0 +1,63 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Cheeseburger",
+      "url": "https://tse4.mm.bing.net/th?id=OIP.a-UewhYPhQNOEYSHTnGkuAHaE8&pid=Api&P=0&w=233&h=155",
+      "price": "18.3"
+    },
+    {
+      "id": 2,
+      "name": "Donbacon",
+      "url": "https://tse2.mm.bing.net/th?id=OIP.IP0PJxMON28iFwM6jsCXCgHaEo&pid=Api&P=0&w=248&h=155",
+      "price": "24.1"
+    },
+    {
+      "id": 3,
+      "name": "Carne",
+      "url": "https://tse2.mm.bing.net/th?id=OIP.2sX97v5kQ3eBwySZNSVzuwHaEo&pid=Api&P=0&w=248&h=155",
+      "price": "26.3"
+    },
+    {
+      "id": 4,
+      "name": "Julinee",
+      "url": "https://tse3.mm.bing.net/th?id=OIP.ZZsn6lD6PCjocBzx1tuu1QHaEo&pid=Api&P=0&w=248&h=155",
+      "price": "12.6"
+    },
+    {
+      "id": 5,
+      "name": "5 cheese",
+      "url": "https://tse2.mm.bing.net/th?id=OIP.qQ9CCtjHHDqs8o-H3j8XCAHaEo&pid=Api&P=0&w=248&h=155",
+      "price": "14.35"
+    },
+    {
+      "id": 6,
+      "name": "cipollo",
+      "url": "https://tse1.mm.bing.net/th?id=OIP.OZny5F6g0QAQPLsU_4HnEAHaE8&pid=Api&P=0&w=245&h=163",
+      "price": "10"
+    }
+  ],
+  "usersinfo": [
+    {
+      "username": "dinesh",
+      "email": "dinnu@gmail.com",
+      "contact": "9154677909",
+      "password": "dinnu@96",
+      "id": 1
+    },
+    {
+      "username": "alekya",
+      "email": "alekya@gmail.com",
+      "contact": "9134234567",
+      "password": "alekya123",
+      "id": 2
+    },
+    {
+      "username": "dhanram",
+      "email": "dhana@gmail.com",
+      "contact": "9134234566",
+      "password": "dhana123",
+      "id": 3
+    }
+  ]
+}
